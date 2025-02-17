@@ -1,6 +1,6 @@
-# Laravel Authentication API
+# Laravel API Authentication with Sanctum
 
-This repository contains a basic authentication system built with Laravel, implementing user registration, login, logout, password reset, and email verification. The project follows a service-based architecture to separate business logic from controllers, improving maintainability and scalability.
+This repository contains a basic authentication system built with Laravel, implementing user registration, login, logout, password reset, and email verification.  
 
 ## Features
 
@@ -8,18 +8,16 @@ This repository contains a basic authentication system built with Laravel, imple
 - **User Login**: Authenticate users and return a valid token.
 - **Logout**: Invalidate the user's authentication token.
 - **Password Reset**: Request a password reset link and update credentials.
-- **Email Verification**: Send verification emails and validate email addresses.
-- **Service-based Architecture**: Business logic is handled in service classes for better code organization.
+- **Email Verification**: Send verification emails and validate email addresses. 
 
 ## Prerequisites
 
 Before running this project, ensure you have the following installed:
 
-- PHP 8.1+
+- PHP 8.2+
 - Composer
-- Laravel 10+
+- Laravel 11+
 - MySQL or PostgreSQL database
-- Redis (for caching email verification tokens)
 - Mail configuration (SMTP, Mailtrap, etc.)
 
 ## Installation
@@ -54,8 +52,8 @@ Before running this project, ensure you have the following installed:
 ## API Endpoints
 
 ```
-POST       api/v1/email/verification-notification  ....................  EmailVerificationController@sendEmail
-POST       api/v1/email/verify  .......................................  EmailVerificationController@verifyEmail
+POST       api/v1/resend-email-verification  ..........................  EmailVerificationController@sendEmail
+POST       api/v1/verify-email  .......................................  EmailVerificationController@verifyEmail
 POST       api/v1/forgot-password  ....................................  AuthController@forgotPassword
 POST       api/v1/login  ..............................................  AuthController@login
 DELETE     api/v1/logout  .............................................  AuthController@logout

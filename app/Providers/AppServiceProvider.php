@@ -37,7 +37,7 @@ class AppServiceProvider extends ServiceProvider
 
             Cache::put('email_verification_' . $token, $user->id, now()->addHour());
 
-            return config('app.frontend_url') . '/email/verify?token=' . $token;
+            return config('app.frontend_url') . '/verify-email?token=' . $token;
         });
     }
 }

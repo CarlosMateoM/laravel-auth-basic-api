@@ -14,7 +14,7 @@ Route::prefix('v1')->group(function () {
         Route::post('/register',          [AuthController::class, 'register']);
         Route::post('/forgot-password',   [AuthController::class, 'forgotPassword']);
         Route::post('/reset-password',    [AuthController::class, 'resetPassword']);
-        Route::post('/email/verify',      [EmailVerificationController::class, 'verifyEmail']);
+        Route::post('/verify-email',      [EmailVerificationController::class, 'verifyEmail']);
     });
 
 
@@ -22,7 +22,7 @@ Route::prefix('v1')->group(function () {
     Route::middleware(['auth:sanctum'])->group(function () {
 
         Route::get('/user',                                 UserController::class);
-        Route::post('/email/verification-notification',     [EmailVerificationController::class, 'sendEmail']);
+        Route::post('/resend-email-verification',     [EmailVerificationController::class, 'sendEmail']);
 
 
         Route::delete('/logout',      [AuthController::class, 'logout']);

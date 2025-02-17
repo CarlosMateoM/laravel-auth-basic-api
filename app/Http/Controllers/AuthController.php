@@ -6,6 +6,7 @@ use App\Http\Requests\ForgotPasswordRequest;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Http\Requests\ResetPasswordRequest;
+use App\Http\Resources\UserResource;
 use App\Services\AuthService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -22,7 +23,10 @@ class AuthController extends Controller
 
         $response = $this->authService->login($data);
 
-        return response()->json(['data' => $response]);
+        return response()->json(['data' =>[
+            'user' => new UserResource($response['user']),
+            'token' => $response['token']
+        ]]);
     }
 
     public function register(RegisterRequest $request): JsonResponse
@@ -31,7 +35,10 @@ class AuthController extends Controller
 
         $response = $this->authService->register($data);
 
-        return response()->json(['data' => $response], 201);
+        return response()->json(['data' => [
+            'user' => new UserResource($response['user']),
+            'token' => $response['token']
+        ]], 201);
     }
 
     public function logout(Request $request): JsonResponse
@@ -40,7 +47,7 @@ class AuthController extends Controller
 
         $this->authService->logout($userId);
 
-        return response()->json(['message' => 'Se ha cerrado la sesión correctamente'], 200);
+        return response()->json(['message' => 'logged out successfully'], 200);
     }
 
     public function forgotPassword(ForgotPasswordRequest $request): JsonResponse
@@ -48,7 +55,7 @@ class AuthController extends Controller
         
         $this->authService->forgotPassword($request->validated());
 
-        return response()->json(['message' => 'Enlace de restablecimiento de contraseña enviado a su correo electrónico.']);
+        return response()->json(['message' => 'reset link sent on your email']);
     }
 
     public function resetPassword(ResetPasswordRequest $request): JsonResponse
@@ -57,7 +64,7 @@ class AuthController extends Controller
 
         $this->authService->resetPassword($data);
 
-        return response()->json(['message' => 'Contraseña restablecida con éxito ']);
+        return response()->json(['message' => 'password reset successfully']);
     }
 
     

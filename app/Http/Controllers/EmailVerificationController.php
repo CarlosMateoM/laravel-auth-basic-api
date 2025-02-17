@@ -17,13 +17,13 @@ class EmailVerificationController extends Controller
     {
         $this->authService->verifyEmail($request->token);
 
-        return response()->json(['message' => 'Correo electrónico verificado con éxito']);
+        return response()->json(['message' => 'email verified successfully']);
     }
 
     public function sendEmail(Request $request): JsonResponse
     {
         $this->authService->sendEmail($request->user()->id);
 
-        return response()->json(['message' => 'Email verification link sent on your email id']);
+        return response()->json(['message' => 'email verification link sent on your email']);
     }
 }
